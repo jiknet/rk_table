@@ -1,0 +1,99 @@
+<!Doctype html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" type="text/css" href="../css/doc_detail.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/font.css"/>
+</head>
+<body>
+	<h2 class="con_title" id="file_info">grid 데이터 호출</h2>
+	<div class="con_text">
+		<p class="con_text_title">sb_tb_Loc('위치id')</p>
+		<p class="con_text_con">해더와 데이터는 같은 위치에 출력되므로 헤더 선언시 한번만 호출하면됨<p>
+		
+		<p class="con_text_title">sb_tb_dataSave(object값)</p>
+		<p class="con_text_con">데이터를 object형식으로 전달<p>
+		
+		<p class="con_text_title">sb_tb_Content(function(row){}</p>
+		<p class="con_text_con">데이터를 출력<p>
+
+	<p class="con_text_title">호출예제 소스코드1(요약)</p>
+	<div class="con_text_con_source">
+	<!-- 소스코드 시작-->
+	<xmp class="showHtml">
+	<body>
+	<div id="showData"></div> //div선언
+	
+	<script src="js/rk_table_option_v1.0.0.js"></script><!-- grid 호출 기능-->
+	<script>
+		//임의 데이터 생성(배열안에 object형식으로 저장)
+		var data=[
+			{"ph":"서울", "dept":"aa1", "age":10, "weight":34},
+			{"ph":"경기", "dept":"aa2", "age":16, "weight":82},
+			{"ph":"충남", "dept":"aa3", "age":23, "weight":77},
+			{"ph":"충북", "dept":"aa4", "age":12, "weight":92},
+			{"ph":"세종", "dept":"aa5", "age":33, "weight":46},
+			{"ph":"대전", "dept":"aa6", "age":19, "weight":65}
+		];
+		
+		//css호출
+		sb_tb_cssTableOption("css/rk_table_option_v1.0.0.css");//테이블 css경로 호출
+		sb_tb_dataSave(data);//데이터값 저장
+		sb_tb_Content(function(row){}//데이터 출력
+	</script>
+	</body>
+	</xmp>
+	<!-- 소스코드 종료-->
+	</div>
+	
+	<p class="con_text_title">호출예제 소스코드2(데이터 출력시 데이터id기준 row별로 커스터마이징)</p>
+	<div class="con_text_con_source">
+	<!-- 소스코드 시작-->
+	<xmp class="showHtml">
+	<body>
+	<div id="showData"></div> //div선언
+	
+	<script src="js/rk_table_option_v1.0.0.js"></script><!-- grid 호출 기능-->
+	<script>
+		//임의 데이터 생성(배열안에 object형식으로 저장)
+		var data=[
+			{"ph":"서울", "dept":"aa1", "age":10, "weight":34},
+			{"ph":"경기", "dept":"aa2", "age":16, "weight":82},
+			{"ph":"충남", "dept":"aa3", "age":23, "weight":77},
+			{"ph":"충북", "dept":"aa4", "age":12, "weight":92},
+			{"ph":"세종", "dept":"aa5", "age":33, "weight":46},
+			{"ph":"대전", "dept":"aa6", "age":19, "weight":65}
+		];
+		
+		//css호출
+		sb_tb_cssTableOption("css/rk_table_option_v1.0.0.css");//테이블 css경로 호출
+		sb_tb_dataSave(data);//데이터값 저장
+		var sum=0;//합계용으로 사용
+		sb_tb_Content(function(row){
+			//dept id의 value값인 aa1을 dd1으로 변경
+			if(row.id=="con_dept_0"){
+				row.value="dd1";
+			}
+			if(row.rowLoc==2){//3번째 줄에 있는 것(0줄부터 시작)
+				row.style="color:#ff0000";
+			}
+			if(row.value>70){//값이 70보다 클때
+				row.style="color:#ff00ff";
+			}
+			if(row.colId=="dept"){//세로줄 아이디값이 dept일 때
+				row.colspan=2;
+			}
+			//몸무게 총합
+			if(row.colId=="weight"){
+				sum+=row.value;
+			}
+		}//데이터 출력
+	</script>
+	</body>
+	</xmp>
+	<!-- 소스코드 종료-->
+	</div>
+	
+	</div>
+</body>
+</html>

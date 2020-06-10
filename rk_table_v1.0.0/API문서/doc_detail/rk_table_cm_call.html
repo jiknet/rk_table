@@ -1,0 +1,61 @@
+<!Doctype html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" type="text/css" href="../css/doc_detail.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/font.css"/>
+</head>
+<body>
+	<h2 class="con_title" id="file_info">grid 커스터마이징 기능 호출</h2>
+	<div class="con_text">
+		<p class="con_text_title">sb_MenuADD('위치id')</p>
+		<p class="con_text_con">원하는 위치에 커스터마이징 메뉴 지정<p>
+		
+		<p class="con_text_title">sb_MenuUse('위치id')</p>
+		<p class="con_text_con">커스터마이징 기능을 적용할 table 태그 위치 지정<p>
+		
+		<p class="con_text_title">sb_tb_cssTableUse('css경로')</p>
+		<p class="con_text_con">커스터마이징 기능에 css경로 선언<p>
+		
+		<p class="con_text_title">rk_colorPalette_css('css경로')</p>
+		<p class="con_text_con">커스터마이징 기능에 포함된 색상선택표 css경로 선언<p>
+		
+		<p class="con_text_title">sb_MenuClear()</p>
+		<p class="con_text_con">커스터마이징 기능종료<p>
+
+	<p class="con_text_title">호출예제 소스코드1(헤더가 한줄)</p>
+	<div class="con_text_con_source">
+	<!-- 소스코드 시작-->
+	<xmp class="showHtml">
+	<body>
+	<input type="button" value="커스터 마이징" onclick="getMenu()">
+	<input type="button" value="커스터 마이징 닫기" onclick="outMenu()">
+	
+	<div id="showMenu"></div> //커스터마이징 메뉴 표기되는 곳
+	<div id="showData"></div> //table이 생성된 곳
+	
+	<script src="js/rk_table_cm_v1.0.0.js"></script> <!-- 커스터마이징 모드 -->
+	<script src="js/rk_colorPalette_v1.0.js"></script> <!-- 색상선택기능(커스터마이징 모드 사용시 필수) -->
+	<script>
+		///커스터마이징 생성
+		function getMenu(){
+			//커스터마이징 메뉴 추가
+			sb_MenuADD("showMenu");//메뉴추가 위치(id값)
+			sb_MenuUse("showData");//기능작동할 곳(id값)
+			sb_tb_cssTableUse("css/rk_table_cm_v1.0.0.css");//커스터마이징 css호출
+			rk_colorPalette_css("css/rk_colorPalette_v1.0.css");//팔랫트 기능css호출
+		}
+		//커스터마이징 기능 없애기
+		function outMenu(){
+			//커스터마이징 메뉴 닫기
+			sb_MenuClear();
+		}
+	</script>
+	</body>
+	</xmp>
+	<!-- 소스코드 종료-->
+	</div>
+	
+	</div>
+</body>
+</html>

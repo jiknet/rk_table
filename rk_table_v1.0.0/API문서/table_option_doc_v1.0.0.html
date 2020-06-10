@@ -1,0 +1,26 @@
+<!Doctype html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" type="text/css" href="css/table_option_doc_v1.0.0.css"/>
+	<link rel="stylesheet" type="text/css" href="css/font.css"/>
+</head>
+<body>
+	<h2 class="main_title">table API 사용법(v1.0)</h2>
+	<div class="left_page">
+		<p class="menu" onclick="getPage('doc_detail/file_info.html')">파일정보</p>
+		<p class="menu" onclick="getPage('doc_detail/rk_tablehd_call.html')">grid 헤더 호출</p>
+		<p class="menu" onclick="getPage('doc_detail/rk_tablecon_call.html')">grid 데이터 호출</p>
+		<p class="menu" onclick="getPage('doc_detail/rk_table_cm_call.html')">grid 커스터마이징 기능 호출</p>
+		<p class="menu" onclick="getPage('doc_detail/totalExam.html')">통합예제</p>
+	</div>
+	<div class="right_page">
+		<iframe id="showDoc" src="doc_detail/file_info.html"></iframe>
+	</div>
+	<script>
+	function getPage(link){
+		document.getElementById("showDoc").src=link;
+	}
+	</script>
+</body>
+</html>

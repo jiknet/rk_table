@@ -1,0 +1,146 @@
+<!Doctype html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" type="text/css" href="../css/doc_detail.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/font.css"/>
+</head>
+<body>
+	<h2 class="con_title" id="file_info">통합예제</h2>
+	<div class="con_text">
+
+	<p class="con_text_title">통합 소스코드 예제</p>
+	<p class="con_text_con">파일명 : table_option_v1.0.0.html</p>
+	<div class="con_text_con_source">
+	<!-- 소스코드 시작-->
+	<xmp class="showHtml">
+	<!Doctype html>
+	<html>
+	<head>
+	<meta charset="utf-8">
+	<style>
+	#btnTot{
+		margin:auto;
+		margin-bottom:20px;
+		width:80%;
+	}
+	#showMenu{
+		margin:auto;
+		width:80%;
+		min-height:35px;
+		margin-bottom:15px;
+	}
+	#showData{
+		margin:auto;
+		width:80%;
+		min-height:100px;
+	}
+	</style>
+	</head>
+	<body>
+	<div id="btnTot">
+		<input type="button" value="데이터 삽입" onclick="getData()">
+		<input type="button" value="커스터 마이징" onclick="getMenu()">
+		<input type="button" value="커스터 마이징 닫기" onclick="outMenu()">
+	</div>
+	<!-- 사용자 커스터마이징 메뉴 표기되는 곳 -->
+	<div id="showMenu"></div>
+	<!-- 테이블이 표기되는 곳 -->
+	<div id="showData"></div>
+
+	<script src="js/rk_table_option_v1.0.0.js"></script><!-- grid 호출 기능-->
+	<script src="js/rk_table_cm_v1.0.0.js"></script> <!-- 커스터마이징 모드 -->
+	<script src="js/rk_colorPalette_v1.0.js"></script> <!-- 색상선택기능(커스터마이징 모드 사용시 필수) -->
+	<script>
+	var data=[
+		{"ph":"서울", "dept":"aa1", "age":10, "weight":34},
+		{"ph":"경기", "dept":"aa2", "age":16, "weight":82},
+		{"ph":"충남", "dept":"aa3", "age":23, "weight":77},
+		{"ph":"충북", "dept":"aa4", "age":12, "weight":92},
+		{"ph":"세종", "dept":"aa5", "age":33, "weight":46},
+		{"ph":"대전", "dept":"aa6", "age":19, "weight":65}
+	];
+	//데이터출력버튼 클릭
+	function getData(){
+		showTitle();//타이틀 출력
+		showCon();//내용 출력
+		sb_tb_cssTableOption("css/rk_table_option_v1.0.0.css");//테이블 css경로 호출
+	}
+	//커스터마이징버튼 클릭 
+	function getMenu(){
+		//커스터마이징 메뉴 추가
+		sb_MenuADD("showMenu");//메뉴추가 위치(id값)
+		sb_MenuUse("showData");//기능작동할 곳(id값)
+		sb_tb_cssTableUse("css/rk_table_cm_v1.0.0.css");//커스터마이징 css호출
+		rk_colorPalette_css("css/rk_colorPalette_v1.0.css");//팔랫트 기능css호출
+	}
+	//커스터마이징 기능 없애기
+	function outMenu(){
+		//커스터마이징 메뉴 닫기
+		sb_MenuClear();
+	}
+	//타이틀
+	function showTitle(){
+		var headerTot=[];
+		
+		/*
+		//타이틀 1줄일 경우
+		headerTot.push({"name":"보건소", "id":"ph" ,"rowspan":"2"});
+		headerTot.push({"name":"통합관리", "id":"dept" ,"colspan":"4"});
+		*/
+		
+		//타이틀이 2줄일 경우
+		var headerList1=[];
+		var headerList2=[];
+		
+		//타이틀 첫번째줄
+		headerList1.push({"name":"보건소", "id":"ph" ,"rowspan":"2"});
+		headerList1.push({"name":"통합관리", "id":"dept" ,"colspan":"4"});
+		//타이틀 두번쨰줄
+		headerList2.push({"name":"부서", "id":"dept" ,"colspan":"2"});
+		headerList2.push({"name": "나이", "id":"age"});
+		headerList2.push({"name": "몸무게", "id":"weight"});
+		
+		//타이틀 총합
+		headerTot.push(headerList1);
+		headerTot.push(headerList2);
+
+		sb_tb_Loc("showData");//테이블 넣을 div위치
+		sb_tb_Header(headerTot);//테이블 헤더값 넣기
+	}
+	function showCon(){
+		sb_tb_dataSave(data);//데이터값 저장
+		var sum=0;//합계용으로 사용
+		sb_tb_Content(function(row){//데이터, 테이블셋팅값, 콜백(출력시 데이터 값 수정가능)
+			//dept id가 aa1을 dd1으로 변경
+			if(row.id=="con_dept_0"){
+				row.value="dd1";
+			}
+			if(row.rowLoc==2){//3번째 줄에 있는 것(0줄부터 시작)
+				row.style="color:#ff0000";
+			}
+			if(row.value>70){//값이 70보다 클때
+				row.style="color:#ff00ff";
+			}
+			if(row.colId=="dept"){//세로줄 아이디값이 dept일 때
+				row.colspan=2;
+			}
+			//몸무게 총합
+			if(row.colId=="weight"){
+				sum+=row.value;
+			}
+			
+		});
+		//console.log(sum);
+	}
+
+	</script>
+	</body>
+	</html>
+	</xmp>
+	<!-- 소스코드 종료-->
+	</div>
+		
+	</div>
+</body>
+</html>

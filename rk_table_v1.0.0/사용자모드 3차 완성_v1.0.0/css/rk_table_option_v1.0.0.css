@@ -1,0 +1,29 @@
+.sb_table{
+	margin:auto;
+	min-width:100%;
+	border-collapse:collapse;
+	border-spacing:0;
+}
+.sb_table thead{
+	/*background-color:#F2F2F2;*/
+	border:1px solid #D8D8D8;
+}
+.sb_table thead tr th{
+	height:40px;
+	font-size:13px;
+	/*font-family:"nanum_gothic_bold";*/
+	text-align:center;	
+	color:#424242;
+	border:1px solid #D8D8D8;
+}
+.sb_table tbody{
+	border:1px solid #D8D8D8;
+}
+.sb_table tbody tr td{
+	height:35px;
+	font-size:13px;
+	/*font-family:"nanum_gothic_reg";*/
+	text-align:center;
+	color:#424242;
+	border:1px solid #D8D8D8;
+}
